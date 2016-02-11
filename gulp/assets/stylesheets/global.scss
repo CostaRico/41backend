@@ -1,0 +1,123 @@
+//#@import "bootstrap-sass/assets/stylesheets/bootstrap";
+
+$navbar-default-bg: #312312;
+$navbar-height: 40px;
+$grid-gutter-width: 0;
+$container-large-desktop: (1340px + $grid-gutter-width);
+$background: black;
+$navbar-inverse-bg: #2780e3;
+@import "bootstrap";
+//border-color: #1967be;
+
+$base-btn: rgba(255,255,255, 0.85);
+$hover-btn: rgba(255,255,255, 1);
+
+//@import "bootstrap";
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  //padding-top: 50px;
+}
+
+.no-round{
+  border-radius: 0;
+}
+
+label{
+  font-weight: normal;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.logo{
+  position: absolute;
+  font-weight: 100;
+  font-size: 20px;
+  left: 10px;
+  top: 5px;
+  color: white;
+  letter-spacing: 1px;
+}
+.header-right{
+  position: absolute;
+  right: 10px;
+  .new-ad, .auth{
+    float: right;
+    position: relative;
+    top: 10px;
+  }
+  .auth{
+    a.enter{
+      padding: 0;
+      color: $base-btn;
+      border-bottom: 1px dashed;
+      margin: 10px;
+      &:hover, &:focus{
+        text-decoration: none;
+        color: $hover-btn;
+
+      }
+    }
+  }
+  .new-ad{
+
+  }
+}
+
+button.btn-vape{
+  &:hover{
+    color: $hover-btn;
+    border: 1px solid $hover-btn;
+  }
+  height: 22px;
+  padding: 0px 5px 0px 5px;
+  background-color: transparent;
+  border: 1px solid $base-btn;
+  color: $base-btn;
+}
+
+
+.select-provider{
+  display: none;
+  width: 213px;
+  position: absolute;
+  top: 32px;
+  right: 0;
+  padding: 5px 10px;
+  border: 1px solid #2780e3;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 13px;
+  > ul{
+    > li{
+      /*padding-left: 2px;
+      padding-right: 2px;*/
+    }
+    padding: 5px 0;
+    position: relative;
+    left: -4px;
+  }
+}
+@import 'grid';
+@import 'filter';
+
+
+
+@import 'vendor/select2';
+@import 'vendor/toastr';
+@import "vendor/react-select";
