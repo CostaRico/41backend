@@ -9,5 +9,5 @@ gem 'turbolinks'
 gem 'sqlite3', group: :development
 gem 'pg', group: :production # For heroku
 gem 'devise'
-gem 'mysql2'
 gem 'omniauth-facebook'
+gem 'activeadmin', '~> 1.0.0.pre1'

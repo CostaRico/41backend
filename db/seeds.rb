@@ -5,3 +5,19 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+category_list = [
+  'стартер-кит',
+  'мод',
+  'атомайзер',
+  'EGO',
+  'жидкость',
+  'проволока',
+  'сменный испаритель',
+  'другое'
+]
+Category.delete_all
+category_list.each do |name|
+  Category.create(name: name)
+end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
