@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222032307) do
+ActiveRecord::Schema.define(version: 20160302231208) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -51,5 +51,47 @@ ActiveRecord::Schema.define(version: 20160222032307) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "categories_properties", id: false, force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "property_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "title"
+    t.text     "text"
+    t.decimal  "price"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "products", ["category_id"], name: "index_products_on_category_id"
+
+  create_table "productvalues", id: false, force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "value_id"
+    t.string   "manual_value"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "properties", ["category_id"], name: "index_properties_on_category_id"
+
+  create_table "values", force: :cascade do |t|
+    t.string   "value"
+    t.integer  "property_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "values", ["property_id"], name: "index_values_on_property_id"
 
 end

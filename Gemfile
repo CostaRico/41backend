@@ -11,3 +11,13 @@ gem 'pg', group: :production # For heroku
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'activeadmin', '~> 1.0.0.pre1'
+gem 'slim'
+gem 'oj'
+
+
+group :development do
+  gem 'byebug'
+  gem 'awesome_print'
+  gem 'quiet_assets'
+  gem 'factory_girl_rails'
+end

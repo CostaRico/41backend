@@ -1,17 +1,17 @@
 ActiveAdmin.register Category do
-
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
+# t.string   "name"
+# t.datetime "created_at", null: false
+# t.datetime "updated_at", null: false
 # permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if resource.something?
-#   permitted
-# end
+permit_params :name, property_ids: []
 
+  form do |f|
+    f.actions
+    f.inputs 'Categories / Properties' do
+      f.input :name
+      f.input :properties, :as => :check_boxes, :input_html => {:multiple => true}
+    end
+    f.actions
+  end
 
 end
