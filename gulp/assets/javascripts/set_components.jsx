@@ -25,10 +25,6 @@ ReactDOM.render(
    <LoginForm />,
    document.getElementById('login-form')
 );
-ReactDOM.render(
-   <Filter />,
-   document.getElementById('vape-filter')
-);
 
 
 /*

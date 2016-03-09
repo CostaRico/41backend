@@ -25,9 +25,21 @@ Property.delete_all
      Диаметр
      Материал
      Термоконтроль
+     Вкус
+     Объем
  ).each do |name|
   Property.create(title: name)
 end
+
+category_all = Category.all
+category_all[0].property_ids = [1,2,3] #стартер-кит
+category_all[1].property_ids = [3,5,1,2,8] #мод
+category_all[2].property_ids = [1,2,3] #атомайзер
+category_all[3].property_ids = [1,2] #EGO
+category_all[4].property_ids = [9,10] #жидкость
+category_all[5].property_ids = [6,7] #проволока
+category_all[6].property_ids = [2,4] #сменный испаритель
+
 
 %w(синий красный белый желтый зеленый).each do |color|
   Property.find_by_title("Цвет").values.create(value: color)
@@ -54,11 +66,12 @@ def category_random_id
 end
 
 100.times do
+  category = Category.find(category_random_id)
   Product.create(
-      title: 'Title',
+      title: category.name,
       price: rand(100),
       text: 'Its a Description Its a Description Its a Description Its a Description Its a Description Its a Description',
-      category_id: category_random_id
+      category_id: category.id
     )
 end
 

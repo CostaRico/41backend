@@ -50,6 +50,7 @@ module.exports = React.createClass({
                 $('#filter > li').show('fast');
             });
         }else{
+            this.props.load(index+1);
             this.setState({focused: index}, ()=> {
                 $.when($('#filter > li').not('.active')
                     .hide(200)).then(()=>{

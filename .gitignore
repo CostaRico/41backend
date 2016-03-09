@@ -44,3 +44,5 @@ bower.json
 .powenv
 
 .idea
+
+.byebug_history
