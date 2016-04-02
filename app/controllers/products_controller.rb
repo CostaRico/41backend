@@ -4,14 +4,24 @@ class ProductsController < InheritedResources::Base
   actions :index, :show, :new, :create
 
   def index
-    products = Product.includes(:category).limit(9)
-    products = products.where(category_id: category_id) if category_id!="0"
+    scope = Product.includes(:category).limit(9)
+
+    products = if category_id!="0"
+                 scope.where(category_id: category_id)
+               else
+                 scope
+               end
+              # binding.pry
+    if params[:value_ids].present?
+      products = products.joins(:values).where(values: { id: params[:value_ids].split(',').map(&:to_i) } )
+    end
+
     respond_to do |format|
-      # data = { "data" => Product.all.to_json , 'count' => Product.count }
-      # format.json { render json: Oj.dump(data) }
-      format.json { render json: [products, Product.count] }
+      format.js { render json: [products, Product.count] }
+      format.json { render json: products, each_serializer: ProductSerializer }
     end
   end
+
 
   private
 

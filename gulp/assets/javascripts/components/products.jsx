@@ -6,15 +6,16 @@ var Filter = require('./filter');
 // var Paginator = require('./paginator');
 
 module.exports = React.createClass({
-    loadProductssFromServer: function(category_id) {
+    loadProductssFromServer: function(category_id, value_ids) {
       $.ajax({
         url: this.props.url,
         type: 'get',
-        data: { 'category_id': category_id },
+        data: { 'category_id': category_id, 'value_ids': value_ids },
         dataType: 'json',
         cache: false,
         success: function(data) {
-          this.setState({data: data[0], page: data[1]});
+          console.log(data);
+          this.setState({data: data.products });
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
@@ -27,7 +28,7 @@ module.exports = React.createClass({
     componentWillMount: function() {
       this.loadProductssFromServer(0);
       ReactDOM.render(
-         <Filter load={this.loadProductssFromServer} />,
+         <Filter load_callback={this.loadProductssFromServer} />,
          document.getElementById('vape-filter')
       );
 

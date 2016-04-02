@@ -1,6 +1,6 @@
  var React = require('react');
  var ReactDOM = require('react-dom');
- var LoginForm = require('./components/login_form');
+ // var LoginForm = require('./components/login_form');
  var Filter = require('./components/filter');
  var Products = require('./components/products');
 
@@ -14,17 +14,18 @@
   console.log("Selected: " + val);
  }
 
- UserActions = require('./actions/UserActions');
- UserStore = require('./stores/UserStore');
+
+ // UserActions = require('./actions/UserActions');
+ // UserStore = require('./stores/UserStore');
 
 ReactDOM.render(
   <Products url="/products" />,
   document.getElementById('products_place')
 );
-ReactDOM.render(
-   <LoginForm />,
-   document.getElementById('login-form')
-);
+// ReactDOM.render(
+//    <LoginForm />,
+//    document.getElementById('login-form')
+// );
 
 
 /*

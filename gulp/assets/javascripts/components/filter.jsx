@@ -41,16 +41,17 @@ module.exports = React.createClass({
     },
     getInitialState: function () {
         return {
-            focused: -1
+            focused: -1,
+            subfilters: []
         };
     },
     clicked: function (index) {
         if(index == this.state.focused){
-            this.setState({focused: -1}, ()=> {
+            this.setState({focused: -1, subfilters: []}, ()=> {
                 $('#filter > li').show('fast');
             });
         }else{
-            this.props.load(index+1);
+            this.props.load_callback( index+1, null );
             this.setState({focused: index}, ()=> {
                 $.when($('#filter > li').not('.active')
                     .hide(200)).then(()=>{
@@ -59,36 +60,46 @@ module.exports = React.createClass({
                     $('.sub-filter').animate({opacity: 1}, 200);
                 });
             });
+            this.getCategoryOptions(index+1);
         }
 
+    },
+
+    getCategoryOptions: function (category_id) {
+      $.ajax({
+        url: 'categories/' + category_id,
+        type: 'get',
+        dataType: 'json',
+        cache: false,
+        success: function(data) {
+          this.setState({subfilters: data});
+          console.log(this.state);
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(category_id, status, err.toString());
+        }.bind(this)
+      });
     },
 
     render: function () {
         var self = this;
 
-        var subFilter = null;
-        var subFilter2 = null;
-
         var subFilters = [];
 
-        var options = [
-            { value: 'one', label: 'One' },
-            { value: 'two', label: 'Two' }
-        ];
+              console.log(this.props);
+        // console.log(options);
 
-        switch (self.state.focused){
-            case 0:
-                //subFilters.push(<StarterKit />);
-                //subFilters.push(<RangeInput />);
-                //subFilters.push(<ColorPicker />);
-                subFilters.push(<Select
-                    name="form-field-name"
-                    value="one"
-                    options={options}
-                />);
-                break;
-            case 1:
-                break;
+        if (self.state.focused > -1){
+            this.state.subfilters.map(function(hash) {
+              subFilters.push(<Select
+                  name="form-field-name"
+                  options={hash.values}
+                  placeholder={hash.name}
+                  index={this.state.focused}
+                  load_callback={this.props.load_callback}
+              />);
+
+            }.bind(this))
         }
 
 

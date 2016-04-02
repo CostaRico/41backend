@@ -6,6 +6,10 @@
     a{
       font-size: 1.3em;
     }
+    > .placeholder {
+      position: absolute;
+      bottom: -30px;
+    }
   }
   > li.before-active{
     border-right: none;

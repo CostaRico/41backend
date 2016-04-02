@@ -4,7 +4,7 @@
 // Only include gem installed javascript assets here. All other js develoment should use Common JS
 // and will be compiled with Gulp and Browserify
 //
-//= require jquery
+//= require jquery-2.1.3.min
 //= require jquery_ujs
 //
 // Pull compiled from /public/assets/javascripts
