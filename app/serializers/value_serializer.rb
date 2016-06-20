@@ -1,9 +1,7 @@
-class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :title, :text, :price, :category_name
+class ValueSerializer < ActiveModel::Serializer
+  attributes :property, :value
 
-  has_one :values, serializer: ValueSerializer
-
-  def category_name
-    object.category.name
+  def property
+    object.property.title
   end
 end

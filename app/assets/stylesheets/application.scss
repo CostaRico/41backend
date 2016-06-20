@@ -6,6 +6,8 @@
  * libsass with Gulp.
  *
  * Pull compiled from /public/assets/stylesheets
- *= require_directory .
+ *= require_self
  *= require global
+ *= require products
  */
+

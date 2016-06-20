@@ -11,9 +11,11 @@ class ProductsController < InheritedResources::Base
                else
                  scope
                end
+    if value_ids.present?
+
+      product_ids = Value.product_ids(value_ids)
+      products = products.joins(:values).where(id: product_ids)
               # binding.pry
-    if params[:value_ids].present?
-      products = products.joins(:values).where(values: { id: params[:value_ids].split(',').map(&:to_i) } )
     end
 
     respond_to do |format|
@@ -31,6 +33,10 @@ class ProductsController < InheritedResources::Base
 
     def category_id
       params[:category_id]
+    end
+
+    def value_ids
+      params[:value_ids] && params[:value_ids].split(',').reject(&:empty?).map(&:to_i)
     end
 end
 
