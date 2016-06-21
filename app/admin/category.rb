@@ -9,9 +9,14 @@ permit_params :name, property_ids: []
     f.actions
     f.inputs 'Categories / Properties' do
       f.input :name
-      f.input :properties, :as => :check_boxes, :input_html => {:multiple => true}
+      f.input :properties, as: :check_boxes, input_html: { multiple: true }
     end
     f.actions
   end
-
+  # show do
+  #   h3 category.name
+  #   div do
+  #     simple_format category.categories
+  #   end
+  # end
 end

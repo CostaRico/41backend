@@ -8,11 +8,12 @@ gem 'turbolinks'
 gem 'sqlite3', group: :development
 gem 'devise'
 gem 'omniauth-facebook'
-gem 'activeadmin', '~> 1.0.0.pre1'
+gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'slim'
 gem 'oj' # for fast json
 gem 'jbuilder'
 gem 'active_model_serializers'
+gem 'twitter-bootstrap-rails'
 
 group :development do
   gem 'byebug'

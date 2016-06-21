@@ -4,52 +4,50 @@ AdminUser.delete_all
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 Category.delete_all
-%w( стартер-кит
-    мод
-    атомайзер
-    EGO
-    жидкость
-    проволока
-    сменный испаритель
-    другое
-).each do |name|
-  Category.create(name: name)
+category = {}
+category['СТРОИТЕЛЬНЫЕ МАТЕРИАЛЫ'] = ['Сухие смеси и грунтовки', 'Кирпич и блоки', 'Гипсокартон и элементы монтажа', 'Кровля']
+category['ОТДЕЛОЧНЫЕ МАТЕРИАЛЫ'] = ['Лакокрасочные материалы', 'Плитка, камень, мозаика', 'Обои', 'Напольные покрытия']
+category['ИНСТРУМЕНТ И ОБОРУДОВАНИЕ'] = ['Электроинструмент', 'Ручной инструмент', 'Станки', 'Расходные материалы']
+category['ЭЛЕКТРИКА И ОСВЕЩЕНИЕ'] = ['Розетки и выключатели', 'Электрические аксессуары', 'Кабель и монтаж', 'Трансформаторы и стабилизаторы']
+category['САНТЕХНИКА, ВОДОСНАБЖЕНИЕ И ОТОПЛЕНИЕ'] = ['Сантехника', 'Водоснабжение и отопление']
+
+category.each do |name, subcategories|
+  cat = Category.create(name: name)
+  subcategories.each do |sub|
+    cat.categories.create(name: sub)
+  end
 end
 
 Property.delete_all
  %w( Цвет
-     Бренд
      Мощность
-     Сопротивление
-     МинимальноеСопротивление
      Диаметр
      Материал
-     Термоконтроль
-     Вкус
      Объем
+     Вес
+     Площадь
+     Длина
  ).each do |name|
   Property.create(title: name)
 end
 
 category_all = Category.all
-category_all[0].property_ids = [1,2,3] #стартер-кит
-category_all[1].property_ids = [3,5,1,2,8] #мод
-category_all[2].property_ids = [1,2,3] #атомайзер
-category_all[3].property_ids = [1,2] #EGO
-category_all[4].property_ids = [9,10] #жидкость
-category_all[5].property_ids = [6,7] #проволока
-category_all[6].property_ids = [2,4] #сменный испаритель
+Category.find_by(name: 'СТРОИТЕЛЬНЫЕ МАТЕРИАЛЫ').update(property_ids: [4,5,6]) # строй материалы
+Category.find_by(name: 'ОТДЕЛОЧНЫЕ МАТЕРИАЛЫ').update(property_ids: [1,4,5,6,7]) # отдел материалы
+Category.find_by(name: 'ИНСТРУМЕНТ И ОБОРУДОВАНИЕ').update(property_ids: [2,4]) # инструмент и оборуд
+Category.find_by(name: 'ЭЛЕКТРИКА И ОСВЕЩЕНИЕ').update(property_ids: [1,4,8]) # электрик и освещ
+Category.find_by(name: 'САНТЕХНИКА, ВОДОСНАБЖЕНИЕ И ОТОПЛЕНИЕ').update(property_ids: [4,8]) # сантехни и водоснабж
 
 
 %w(синий красный белый желтый зеленый).each do |color|
   Property.find_by_title("Цвет").values.create(value: color)
 end
 
-%w(Сони Феррари Меркури Саоми Гугл).each do |brand|
-  Property.find_by_title("Бренд").values.create(value: brand)
+%w(Weber Bosch Makita ЗУБР DWT).each do |brand|
+  Brand.create(title: brand)
 end
 
-%w(1w 2w 5w 10w 20w).each do |power|
+%w(100w 200w 500w 1000w 2000w).each do |power|
   Property.find_by_title("Мощность").values.create(value: power)
 end
 
@@ -57,7 +55,7 @@ end
   Property.find_by_title("Материал").values.create(value: power)
 end
 
-%w(1см 2см 5см).each do |power|
+%w(10см 20см 50см).each do |power|
   Property.find_by_title("Диаметр").values.create(value: power)
 end
 
@@ -74,13 +72,3 @@ end
       category_id: category.id
     )
 end
-
-
-# FactoryGirl.define do
-#   factory :product do
-#     title "John"
-#     text  "Doe"
-#     price 120
-#     category_id "#{rand(1..8)}"
-#   end
-# end
