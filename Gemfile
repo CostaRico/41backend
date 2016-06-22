@@ -10,10 +10,12 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'slim'
+gem 'haml'
 gem 'oj' # for fast json
 gem 'jbuilder'
 gem 'active_model_serializers'
 gem 'twitter-bootstrap-rails'
+gem 'kaminari'
 
 group :development do
   gem 'byebug'

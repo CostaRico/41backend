@@ -1,0 +1,14 @@
+%tr
+  %td
+    = product.id
+  %td
+    = product.title
+  %td
+    = product.category.name
+  %td
+    = product.text
+  %td
+    = product.price
+  %td.actions
+    = render 'adminka/shared/actions', object: product
+

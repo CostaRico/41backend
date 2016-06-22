@@ -1,6 +1,11 @@
 module ApplicationHelper
-  def gulp_asset_path(path)
-    path = REV_MANIFEST[path] if defined?(REV_MANIFEST)
-    "/assets/#{path}"
+  def menu
+    @menu ||= I18n.t('adminka.menu').map do |model_name, title|
+      { name: title, path: path(model_name) }
+    end
+  end
+
+  def path(object)
+    send("adminka_#{object}_path".to_sym)
   end
 end

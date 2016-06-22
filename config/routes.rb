@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'admin/dashboard#index'
+  namespace :adminka do
+    resources :categories, :products, :brands, :properties
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
