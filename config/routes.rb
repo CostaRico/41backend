@@ -11,9 +11,11 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'admin/dashboard#index'
+  root 'adminka/products#index'
   namespace :adminka do
-    resources :categories, :products, :brands, :properties
+    resources :categories, :products, :brands, :properties do
+      get 'search', on: :collection
+    end
   end
 
   # Example of regular route:

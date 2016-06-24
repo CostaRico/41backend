@@ -5,6 +5,7 @@
     %meta{ name: 'robots', content: 'noindex, nofollow' }
     %title Valera
 
+    = csrf_meta_tag
     = stylesheet_link_tag 'adminka/application'
     = javascript_include_tag 'adminka/application'
 
@@ -18,6 +19,11 @@
                 =link_to item[:name], item[:path]
           %ul.nav.navbar-nav.navbar-right
             %li= link_to t('.to_main_page'), root_path
+    .container-fluid
+      .row
+        .col-md-12
+          = link_to controller: controller_name, action: :new do
+            %button.btn.btn-primary{ type:"button" } Create
     #layout
       = render 'application/flash_messages'
       .page

@@ -1,5 +1,7 @@
 /*
- *= require adminka/bootstrap.min
+ *= require adminka/bootstrap
+ *= require adminka/selectize.bootstrap
+ *= require adminka/selectize.default
  *= require adminka/layout
  *= require adminka/entitys
  */

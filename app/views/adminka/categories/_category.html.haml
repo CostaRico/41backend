@@ -1,14 +1,10 @@
 %tr
   %td
-    = ad_page.id
+    = category.id
   %td
-    = ad_page.route
+    = link_to category.name, [:adminka, category]
   %td
-    = ad_page.banners.map &:name
-  %td
-    - ad_page.banners.each do |banner|
-      = link_to banner.image.url do
-        = image_tag banner.image.url(:admin)
+    = category.properties.map(&:title)
   %td.actions
-    = render 'advertisement/shared/actions', object: ad_page
+    = render 'adminka/shared/actions', object: category
 

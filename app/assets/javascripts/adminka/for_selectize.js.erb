@@ -1,0 +1,35 @@
+$(function(){
+  var reg_select = function($select, attr, url) {
+    $select.first().selectize({
+        plugins: ['remove_button'],
+        valueField: attr,
+        labelField: attr,
+        searchField: attr,
+        create: false,
+        preload: true,
+        options: [],
+        items: $select.data('chosen'),
+        load: function(query, callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    id: $select.data('entity-id'),
+                    q: query
+                },
+                error: function() {
+                    callback();
+                },
+                success: function(res) {
+                    callback(res);
+                }
+            });
+        }
+    });
+  };
+  reg_select($('#category_properties'), 'title', '/adminka/properties');
+  reg_select($('#property_categories'), 'name', '/adminka/categories');
+  reg_select($('#product_brand'), 'title', '/adminka/brands/search');
+  reg_select($('#product_category'), 'name', '/adminka/categories/search');
+});

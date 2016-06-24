@@ -17,9 +17,9 @@ module Adminka
     end
 
     def create
-      @product = Product.new(product_params)
+      @product = Product.new(full_product_params)
       if @product.save
-        redirect_to adminka_products_path
+        render :edit
       else
         render :edit
       end
@@ -27,8 +27,8 @@ module Adminka
 
     def update
       @product = find_product
-      if @product.update_attributes(product_params)
-        redirect_to adminka_products_path
+      if @product.update_attributes(full_product_params)
+        render :edit
       else
         render :edit
       end
@@ -43,6 +43,12 @@ module Adminka
 
     def product_params
       params.require(:product).permit(:title, :text, :price, :category_id, :brand_id)
+    end
+
+    def full_product_params
+      brand_id = Brand.find_by(title: params[:product][:brand]).id
+      category_id = Category.find_by(name: params[:product][:category]).id
+      product_params.merge(brand_id: brand_id, category_id: category_id)
     end
 
     def find_product

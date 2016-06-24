@@ -2,8 +2,13 @@
   %thead
     %tr
       %th= t('.id')
-      %th= t('.name')
-      %th= t('.description')
+      %th= t('.title')
+      %th= t('.category')
+      %th= t('.brand')
+      %th= t('.text')
+      %th= t('.price')
   %tbody
     = render @products
     = paginate @products, theme: 'adminka'
+
+= paginate @products, theme: 'adminka'

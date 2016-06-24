@@ -2,14 +2,8 @@
   %thead
     %tr
       %th= t('.id')
-      %th= t('.name')
-      %th= t('.image')
-      %th= t('.link')
-      %th= t('.date_start')
-      %th= t('.date_end')
-      %th= t('.show_count')
-      %th= t('.cross_count')
-      %th= t('.test')
+      %th= t('.title')
+      %th= t('.description')
   %tbody
-    = render @banners
-    = paginate @banners, theme: 'adminka'
+    = render @brands
+    = paginate @brands, theme: 'adminka'

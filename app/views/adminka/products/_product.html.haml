@@ -6,6 +6,8 @@
   %td
     = product.category.name
   %td
+    = product.brand.try(:title)
+  %td
     = product.text
   %td
     = product.price

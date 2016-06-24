@@ -1,4 +1,5 @@
 class Property < ActiveRecord::Base
-  has_and_belongs_to_many :category
+  has_many :category_properties
+  has_many :categories, through: :category_properties
   has_many :values
 end

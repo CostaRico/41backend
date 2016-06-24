@@ -4,7 +4,23 @@
     .col-sm-5
       = f.text_field :title, class: 'form-control'
   .form-group
-    %label.col-sm-2.control-label{ for: 'text' } Description
+    %label.col-sm-2.control-label{ for: 'name' } Category
+    .col-sm-5
+      = f.collection_select :category, (@product.category ? [@product.category] : []),
+                            :id, :name, {}, { class: 'form-control',
+                                               id: 'product_category',
+                                               data: { entity_id: @product.id,
+                                               chosen: [@product.category.try(:name)] } }
+  .form-group
+    %label.col-sm-2.control-label{ for: 'brand' } Brand
+    .col-sm-5
+      = f.collection_select :brand, (@product.brand ? [@product.brand] : []),
+                            :id, :title, {}, { class: 'form-control',
+                                               id: 'product_brand',
+                                               data: { entity_id: @product.id,
+                                               chosen: [@product.brand.try(:title)] } }
+  .form-group
+    %label.col-sm-2.control-label{ for: 'text' } Text
     .col-sm-5
       = f.text_area :text, rows: 3, class: 'form-control'
   .form-group

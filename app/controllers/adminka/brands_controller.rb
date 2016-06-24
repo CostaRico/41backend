@@ -39,10 +39,24 @@ module Adminka
       redirect_to adminka_brands_path
     end
 
+    def search
+      if params[:q] && params[:q].present?
+        coll = Brand.limit(20).ransack(title_cont_any: params[:q]).result
+      else
+        coll = Brand.limit(20)
+      end
+      render json: coll, root: false
+    end
+
     private
 
     def brand_params
       params.require(:brand).permit(:name, :description)
+    end
+
+    def full_brand_params
+      brand_id = Brand.where(title: params[:brand][:properties]).map(&:id)
+      category_params.merge(property_ids: prop_ids)
     end
 
     def find_brand

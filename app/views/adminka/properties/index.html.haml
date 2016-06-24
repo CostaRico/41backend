@@ -1,0 +1,11 @@
+%table.table.properties
+  %thead
+    %tr
+      %th= t('.id')
+      %th.title= t('.title')
+      %th= t('.category')
+  %tbody
+    = render @properties
+    = paginate @properties, theme: 'adminka'
+
+= paginate @properties, theme: 'adminka'

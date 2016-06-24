@@ -2,8 +2,8 @@
   %thead
     %tr
       %th= t('.id')
-      %th= t('.route')
-      %th{ colspan: 2 }= t('.banner')
+      %th= t('.name')
+      %th= t('.properties')
   %tbody
-    = render @ad_pages
-    = paginate @ad_pages, theme: 'adminka'
+    = render @categories
+    = paginate @categories, theme: 'adminka'

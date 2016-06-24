@@ -1,0 +1,10 @@
+%tr
+  %td
+    = property.id
+  %td
+    = property.title
+  %td
+    = property.categories.map(&:name)
+  %td.actions
+    = render 'adminka/shared/actions', object: property
+

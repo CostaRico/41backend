@@ -2,6 +2,10 @@ module Adminka
   class PropertiesController < ApplicationController
     def index
       @properties = Property.order(:id).page params[:page]
+      respond_to do |format|
+        format.js { render json: @properties, root: false }
+        format.html
+      end
     end
 
     def new
@@ -19,7 +23,7 @@ module Adminka
     def create
       @property = Property.new(property_params)
       if @property.save
-        redirect_to adminka_properties_path
+        render :edit
       else
         render :edit
       end
@@ -27,8 +31,8 @@ module Adminka
 
     def update
       @property = find_property
-      if @property.update_attributes(property_params)
-        redirect_to adminka_properties_path
+      if @property.update_attributes(full_property_params)
+        render :edit
       else
         render :edit
       end
@@ -43,6 +47,11 @@ module Adminka
 
     def property_params
       params.require(:property).permit(:name, :description)
+    end
+
+    def full_property_params
+      categ_ids = Category.where(name: params[:property][:categories]).map(&:id)
+      property_params.merge(category_ids: categ_ids)
     end
 
     def find_property

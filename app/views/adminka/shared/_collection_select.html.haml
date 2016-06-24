@@ -1,0 +1,5 @@
+= f.collection_select prop, array,
+                      :id, :attr, {}, { class: 'form-control',
+                                         id: 'product_brand',
+                                         data: { entity_id: @product.id,
+                                         chosen: @product.brand.try(:title) } }

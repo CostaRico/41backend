@@ -24,8 +24,6 @@ td.actions {
   width: 280px;
 }
 
-.dreamer-form-find-by-id,
-.form-find-by-fields {
-  float: left;
-  padding-right: 20px;
+.properties th.title {
+  width: 280px;
 }

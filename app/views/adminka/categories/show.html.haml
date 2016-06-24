@@ -2,7 +2,8 @@
   %thead
     %tr
       %th= t('.id')
-      %th= t('.route')
-      %th{ colspan: 2 }= t('.banner')
+      %th= t('.name')
+      %th= t('.properties')
   %tbody
-    = render @ad_page
+    = render @categories
+= render 'form', category: Category.new(category_id: @category.id)
