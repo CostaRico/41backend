@@ -16,6 +16,7 @@ gem 'jbuilder'
 gem 'active_model_serializers'
 gem 'twitter-bootstrap-rails'
 gem 'kaminari'
+gem 'carrierwave'
 
 group :development do
   gem 'byebug'

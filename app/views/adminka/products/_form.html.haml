@@ -23,6 +23,21 @@
     %label.col-sm-2.control-label{ for: 'text' } Text
     .col-sm-5
       = f.text_area :text, rows: 3, class: 'form-control'
+  %hr
+  - @product.product_properties.each do |prop|
+    = f.fields_for 'product_properties_attributes[]', prop do |pp|
+      .form-group
+        %label.col-sm-2.control-label{ for: 'value' }= prop.property.title
+        .col-sm-3
+          = pp.collection_select :value_id, prop.values,
+                            :id, :value, {}, { class: 'form-control',
+                                               id: 'product_value',
+                                               data: { entity_id: @product.id,
+                                               chosen: [prop.value] } }
+        .col-sm-2
+          = pp.text_field :man_value, class: 'form-control'
+          = pp.hidden_field :property_id, value: prop.property.id
+          = pp.hidden_field :id
   .form-group
     .col-sm-5.col-md-offset-2
       = f.submit (@product.new_record? ? 'Create' : 'Save'), class: 'btn btn-default'

@@ -13,5 +13,14 @@
                                               data: { entity_id: @property.id,
                                                       chosen: @property.categories.map(&:name) } }
   .form-group
+    %label.col-sm-2.control-label{ for: 'value' } Values
+    .col-sm-5
+      = f.collection_select :values, @property.values,
+                            :id, :value, {}, { multiple: true,
+                                              class: 'form-control',
+                                              id: 'property_values',
+                                              data: { entity_id: @property.id,
+                                                      chosen: @property.values.map(&:value) } }
+  .form-group
     .col-sm-5.col-md-offset-2
       = f.submit (@property.new_record? ? 'Create' : 'Save'), class: 'btn btn-default'

@@ -4,7 +4,7 @@
   %td
     = product.title
   %td
-    = product.category.name
+    = product.category.try(:name)
   %td
     = product.brand.try(:title)
   %td

@@ -3,6 +3,7 @@ module Adminka
     def index
       @categories = Category.where(category_id: nil).
                     order(:id).
+                    includes(:properties).
                     page params[:page]
       respond_to do |format|
         format.js { render json: @categories, root: false }

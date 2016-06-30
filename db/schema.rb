@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621144641) do
+ActiveRecord::Schema.define(version: 20160625150257) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -71,6 +71,19 @@ ActiveRecord::Schema.define(version: 20160621144641) do
 
   add_index "category_properties", ["category_id"], name: "index_category_properties_on_category_id"
   add_index "category_properties", ["property_id"], name: "index_category_properties_on_property_id"
+
+  create_table "product_properties", force: :cascade do |t|
+    t.integer  "property_id"
+    t.integer  "product_id"
+    t.integer  "value_id"
+    t.string   "man_value"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "product_properties", ["product_id"], name: "index_product_properties_on_product_id"
+  add_index "product_properties", ["property_id"], name: "index_product_properties_on_property_id"
+  add_index "product_properties", ["value_id"], name: "index_product_properties_on_value_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "title"

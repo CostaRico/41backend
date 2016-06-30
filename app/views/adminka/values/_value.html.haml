@@ -2,7 +2,7 @@
   %td
     = property.title
   %td
-    = property.categories.map(&:name)
+    = property.values.map(&:value)
   %td.actions
     = render 'adminka/shared/actions', object: property
 

@@ -1,11 +1,11 @@
 $(function(){
-  var reg_select = function($select, attr, url) {
+  var reg_select = function($select, attr, url, create_flag) {
     $select.first().selectize({
         plugins: ['remove_button'],
         valueField: attr,
         labelField: attr,
         searchField: attr,
-        create: false,
+        create: create_flag,
         preload: true,
         options: [],
         items: $select.data('chosen'),
@@ -28,8 +28,9 @@ $(function(){
         }
     });
   };
-  reg_select($('#category_properties'), 'title', '/adminka/properties');
-  reg_select($('#property_categories'), 'name', '/adminka/categories');
-  reg_select($('#product_brand'), 'title', '/adminka/brands/search');
-  reg_select($('#product_category'), 'name', '/adminka/categories/search');
+  reg_select($('#category_properties'), 'title', '/adminka/properties', false);
+  reg_select($('#property_categories'), 'name', '/adminka/categories', false);
+  reg_select($('#property_values'), 'value', '/adminka/values/search', true);
+  reg_select($('#product_brand'), 'title', '/adminka/brands/search', false);
+  reg_select($('#product_category'), 'name', '/adminka/categories/search', false);
 });

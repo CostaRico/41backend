@@ -1,7 +1,9 @@
 module Adminka
   class PropertiesController < ApplicationController
     def index
-      @properties = Property.order(:id).page params[:page]
+      @properties = Property.order(:id).
+                    includes(:categories).
+                    page params[:page]
       respond_to do |format|
         format.js { render json: @properties, root: false }
         format.html
@@ -51,11 +53,20 @@ module Adminka
 
     def full_property_params
       categ_ids = Category.where(name: params[:property][:categories]).map(&:id)
-      property_params.merge(category_ids: categ_ids)
+      value_ids = create_values_for_property
+      property_params.merge(category_ids: categ_ids, value_ids: value_ids)
+    end
+
+    def create_values_for_property
+      form_value_names = params[:property][:values]
+      saved_values = Value.where(value: form_value_names).map(&:value)
+      (form_value_names - saved_values).each do |name|
+        find_property.values.create(value: name)
+      end
     end
 
     def find_property
-      Property.find(params[:id])
+      @property ||= Property.find(params[:id])
     end
   end
 end

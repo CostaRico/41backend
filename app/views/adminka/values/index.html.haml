@@ -2,9 +2,9 @@
   %thead
     %tr
       %th.title= t('.title')
-      %th= t('.category')
+      %th= t('.values')
   %tbody
-    = render @properties
+    = render partial: 'adminka/values/value', collection: @properties, as: :property
     = paginate @properties, theme: 'adminka'
 
 = paginate @properties, theme: 'adminka'

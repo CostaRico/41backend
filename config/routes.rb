@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'adminka/products#index'
   namespace :adminka do
-    resources :categories, :products, :brands, :properties do
+    resources :categories, :products, :brands, :properties, :values do
       get 'search', on: :collection
     end
   end
