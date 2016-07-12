@@ -1,0 +1,12 @@
+%table.table
+  %thead
+    %tr
+      %th= t('.id')
+      %th= t('.action')
+  %tbody
+    - @product.images.each do |photo|
+      %tr
+        %td= image_tag photo.photo.url(:medium)
+        %td.actions= link_to 'delete', adminka_image_path(photo), method: :delete
+
+

@@ -18,6 +18,10 @@ module Adminka
       @product = find_product
     end
 
+    def photos
+      @product = find_product
+    end
+
     def create
       @product = Product.new(full_product_params)
       if @product.save
@@ -31,6 +35,7 @@ module Adminka
     def update
       @product = find_product
       if @product.update_attributes(full_product_params)
+        create_images
         property_product_creator
         redirect_to [:edit, :adminka, @product]
       else
@@ -51,6 +56,10 @@ module Adminka
         product_properties_attributes: [:id, :value_id, :man_value, :property_id])
     end
 
+    def product_image_params
+      params.require(:product).permit(photos: [])
+    end
+
     def full_product_params
       brand_id = Brand.find_by(title: params[:product][:brand]).id rescue nil
       category_id = Category.find_by(name: params[:product][:category]).id
@@ -59,6 +68,14 @@ module Adminka
 
     def find_product
       @product ||= Product.find(params[:id])
+    end
+
+    def create_images
+      if product_image_params.present?
+        product_image_params['photos'].each do |image|
+          find_product.images.new(photo: image).save!
+        end
+      end
     end
 
     def property_product_creator

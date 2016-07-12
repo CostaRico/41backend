@@ -24,6 +24,9 @@
         .col-md-12
           = link_to controller: controller_name, action: :new do
             %button.btn.btn-primary{ type:"button" } Create
+          - if %w(show edit photos).include? action_name
+            = link_to controller: controller_name, action: :edit, id: params[:id] do
+              %button.btn.btn-warning{ type:"button" }= 'Edit'# + controller_name[0..-2]
     #layout
       = render 'application/flash_messages'
       .page

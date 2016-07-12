@@ -9,5 +9,9 @@ class Product < ActiveRecord::Base
   belongs_to :brand
   has_many :product_properties
   has_many :prop_values, class_name: 'ProductProperty', dependent: :destroy
-  accepts_nested_attributes_for :values, :product_properties, allow_destroy: true
+  has_many :images, dependent: :destroy
+  accepts_nested_attributes_for :values,
+                                :product_properties,
+                                :images, allow_destroy: true
+
 end

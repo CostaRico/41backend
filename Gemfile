@@ -16,7 +16,8 @@ gem 'jbuilder'
 gem 'active_model_serializers'
 gem 'twitter-bootstrap-rails'
 gem 'kaminari'
-gem 'carrierwave'
+gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
+gem 'mini_magick'
 
 group :development do
   gem 'byebug'

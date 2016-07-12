@@ -23,6 +23,15 @@
     %label.col-sm-2.control-label{ for: 'text' } Text
     .col-sm-5
       = f.text_area :text, rows: 3, class: 'form-control'
+  .form-group
+    %label.col-sm-2.control-label{ for: 'photos' }= link_to 'Edit photos', photos_adminka_product_path
+    .col-md-6
+      - @product.images.each do |image|
+        = link_to image_tag(image.photo.url(:thumb)), image.photo.url
+  .form-group
+    %label.col-sm-2.control-label{ for: 'photos' } Photos
+    .col-sm-5
+      = f.file_field :photos, multiple: true, accept: 'image/jpeg, image/jpg, image/gif, image/png', class: 'form-control'
   %hr
   - @product.product_properties.each do |prop|
     = f.fields_for 'product_properties_attributes[]', prop do |pp|
