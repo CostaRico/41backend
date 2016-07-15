@@ -51,7 +51,7 @@ module Adminka
     private
 
     def brand_params
-      params.require(:brand).permit(:name, :description)
+      params.require(:brand).permit(:name, :description, :title)
     end
 
     def full_brand_params

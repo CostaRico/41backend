@@ -34,7 +34,7 @@ module Adminka
     def update
       @property = find_property
       if @property.update_attributes(full_property_params)
-        render :edit
+        redirect_to action: :index
       else
         render :edit
       end
@@ -48,7 +48,7 @@ module Adminka
     private
 
     def property_params
-      params.require(:property).permit(:name, :description)
+      params.require(:property).permit(:name, :description, :title)
     end
 
     def full_property_params
@@ -58,11 +58,12 @@ module Adminka
     end
 
     def create_values_for_property
-      form_value_names = params[:property][:values]
+      form_value_names = params[:property][:values].reject(&:blank?)
       saved_values = Value.where(value: form_value_names).map(&:value)
       (form_value_names - saved_values).each do |name|
         find_property.values.create(value: name)
       end
+      Value.where(value: form_value_names).map(&:id)
     end
 
     def find_property

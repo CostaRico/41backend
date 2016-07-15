@@ -1,8 +1,5 @@
 require 'factory_girl_rails'
 
-AdminUser.delete_all
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
-
 Category.delete_all
 category = {}
 category['СТРОИТЕЛЬНЫЕ МАТЕРИАЛЫ'] = ['Сухие смеси и грунтовки', 'Кирпич и блоки', 'Гипсокартон и элементы монтажа', 'Кровля']
@@ -32,12 +29,11 @@ Property.delete_all
 end
 
 category_all = Category.all
-Category.find_by(name: 'СТРОИТЕЛЬНЫЕ МАТЕРИАЛЫ').update(property_ids: [4,5,6]) # строй материалы
-Category.find_by(name: 'ОТДЕЛОЧНЫЕ МАТЕРИАЛЫ').update(property_ids: [1,4,5,6,7]) # отдел материалы
-Category.find_by(name: 'ИНСТРУМЕНТ И ОБОРУДОВАНИЕ').update(property_ids: [2,4]) # инструмент и оборуд
-Category.find_by(name: 'ЭЛЕКТРИКА И ОСВЕЩЕНИЕ').update(property_ids: [1,4,8]) # электрик и освещ
-Category.find_by(name: 'САНТЕХНИКА, ВОДОСНАБЖЕНИЕ И ОТОПЛЕНИЕ').update(property_ids: [4,8]) # сантехни и водоснабж
-
+Category.find_by(name: 'СТРОИТЕЛЬНЫЕ МАТЕРИАЛЫ').update(property_ids: Property.where(title: %w(Материал Объем Вес)).ids) # строй материалы
+Category.find_by(name: 'ОТДЕЛОЧНЫЕ МАТЕРИАЛЫ').update(property_ids: Property.where(title: %w(Цвет Материал Объем Вес Площадь)).ids) # отдел материалы
+Category.find_by(name: 'ИНСТРУМЕНТ И ОБОРУДОВАНИЕ').update(property_ids: Property.where(title: %w(Материал Мощность)).ids) # инструмент и оборуд
+Category.find_by(name: 'ЭЛЕКТРИКА И ОСВЕЩЕНИЕ').update(property_ids: Property.where(title: %w(Цвет Материал Длина)).ids) # электрик и освещ
+Category.find_by(name: 'САНТЕХНИКА, ВОДОСНАБЖЕНИЕ И ОТОПЛЕНИЕ').update(property_ids: Property.where(title: %w(Материал Длина)).ids) # сантехни и водоснабж
 
 %w(синий красный белый желтый зеленый).each do |color|
   Property.find_by_title("Цвет").values.create(value: color)
@@ -63,10 +59,11 @@ def category_random_id
   Category.select(:id).map(&:id).sample
 end
 
-100.times do
+Product.delete_all
+100.times do |time|
   category = Category.find(category_random_id)
   Product.create(
-      title: category.name,
+      title: "Товар#{time+1}",
       price: rand(100),
       text: 'Its a Description Its a Description Its a Description Its a Description Its a Description Its a Description',
       category_id: category.id

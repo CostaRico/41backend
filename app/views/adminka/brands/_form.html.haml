@@ -12,7 +12,7 @@
   .form-group
     %label.col-sm-2.control-label{ for: 'description' } Description
     .col-sm-5
-      = f.text_field :description, class: 'form-control'
+      = f.text_area :description, rows: 3, class: 'form-control'
   .form-group
     .col-sm-5.col-md-offset-2
       = f.submit (@brand.new_record? ? 'Create' : 'Save'), class: 'btn btn-default'

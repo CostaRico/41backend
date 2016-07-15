@@ -2,7 +2,9 @@
   %td
     = property.title
   %td
-    = property.categories.map(&:name)
+    = property.categories.map(&:name).join("<br>").html_safe
+  %td
+    = property.values.map(&:value).join("<br>").html_safe
   %td.actions
     = render 'adminka/shared/actions', object: property
 
